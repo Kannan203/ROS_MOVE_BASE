@@ -1,0 +1,18 @@
+<launch>
+ <!-- Arguments -->
+ <arg name="robot_id" default="1" />
+ <!-- Main -->
+ <node pkg="crisis" name="Crisis" type="Crisis.py" output="screen" args="$(arg robot_id)"/>
+
+  <node pkg="move_base" type="move_base" name="move_base" output="screen">
+
+    <rosparam file="$(find crisis)/config/global_costmap_params.yaml" command="load" /> 
+    <rosparam file="$(find crisis)/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find crisis)/config/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
+    <rosparam file="$(find crisis)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find crisis)/config/base_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find crisis)/config/dwa_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find crisis)/config/move_base_params.yaml" command="load" />     
+ </node>
+ 
+</launch>
